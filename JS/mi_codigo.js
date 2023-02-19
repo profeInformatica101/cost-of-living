@@ -1,4 +1,4 @@
-
+//CONSTANTE
 const PAIS = "Spain";
 
 let ciudades = [];
@@ -9,7 +9,7 @@ let salario_medio_pais;
 function configuracion() {
 
     //Mapeamos los valores que nos interesan
-    ciudades = datum.map((c)=> new Ciudad(c[""], c["Tomato (1kg)"], c["Fitness Club, Monthly Fee for 1 Adult"], c["Price per Square Meter to Buy Apartment in City Centre"], c["Price per Square Meter to Buy Apartment Outside of Centre"],c["Average Monthly Net Salary (After Tax)"]));
+    ciudades = datum.map((c)=> new Ciudad(c[""], parseFloat(c["Tomato (1kg)"]), parseFloat(c["Fitness Club, Monthly Fee for 1 Adult"]), parseFloat(c["Price per Square Meter to Buy Apartment in City Centre"]), parseFloat(c["Price per Square Meter to Buy Apartment Outside of Centre"]),parseFloat(c["Average Monthly Net Salary (After Tax)"])));
 
     //Filtramos los valores que nos interesan
     ciudades_pais = ciudades.filter((c)=>c.nombre.includes(PAIS));
@@ -29,7 +29,8 @@ function configuracion() {
     
     
     console.log(PAIS+" salario_medio_pais:"+salario_medio_pais);
-    //TODO: console.log(PAIS+" precio_medio_tomate:"+precio_medio_tomate);
+    //TODO: 
+    //console.log(PAIS+" precio_medio_tomate:"+precio_medio_tomate);
 }
 
 function principal(){
