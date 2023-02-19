@@ -1,18 +1,40 @@
+//CONSTANTE
+const PAIS = "Spain";
 
 let ciudades = [];
-let ciudades_spain = [];
+let ciudades_pais = [];
+let lst_salario = [];
+let salario_medio_pais;
 
 function configuracion() {
 
     //Mapeamos los valores que nos interesan
-    ciudades = datum.map((c)=> new Ciudad(c[""], c["Tomato (1kg)"], c["Fitness Club, Monthly Fee for 1 Adult"], c["Price per Square Meter to Buy Apartment in City Centre"], c["Price per Square Meter to Buy Apartment Outside of Centre"],c["Average Monthly Net Salary (After Tax)"]));
+    ciudades = datum.map((c)=> new Ciudad(c[""], parseFloat(c["Tomato (1kg)"]), parseFloat(c["Fitness Club, Monthly Fee for 1 Adult"]), parseFloat(c["Price per Square Meter to Buy Apartment in City Centre"]), parseFloat(c["Price per Square Meter to Buy Apartment Outside of Centre"]),parseFloat(c["Average Monthly Net Salary (After Tax)"])));
 
     //Filtramos los valores que nos interesan
-    ciudades_spain = ciudades.filter((x)=>x.nombre.includes("Spain"));
+    ciudades_pais = ciudades.filter((c)=>c.nombre.includes(PAIS));
+   
+    //Mapeamos a listado de Float con los salarios
+    lst_salario = ciudades_pais.map((c)=>parseFloat(c.salario_medio));
 
+    //Reducimos el listado de float a una media de salarios.
+    salario_medio_pais = lst_salario.reduce((total, amount, index, array) => {
+        total += amount;
+        if( index === array.length-1) { 
+          return total/array.length;
+        }else { 
+          return total;
+        }
+      });
+    
+    
+    console.log(PAIS+" salario_medio_pais:"+salario_medio_pais);
+    //TODO: 
+    //console.log(PAIS+" precio_medio_tomate:"+precio_medio_tomate);
 }
-function principal(){
 
+function principal(){
+    genera_tabla();
 }
 
 class Ciudad{
@@ -26,3 +48,56 @@ class Ciudad{
     }
 
 }
+
+function genera_tabla() {
+    document.getElementById("nombrePais").innerHTML = PAIS;
+
+    // Obtener la referencia del elemento body
+    var contenedor = document.getElementById("contenedor");
+  
+    // Crea un elemento <table> y un elemento <tbody>
+    var tabla   = document.getElementById("tabla");
+
+
+
+    var tblBody = document.createElement("tbody");
+  
+    // Crea las celdas
+    for (var i = 0; i < ciudades_pais.length; i++) {
+      // Crea las hileras de la tabla
+      var hilera = document.createElement("tr");
+  
+      var celda = document.createElement("td");
+      var textoCelda = document.createTextNode(ciudades_pais[i].nombre);
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+
+      celda = document.createElement("td");
+      textoCelda = document.createTextNode(ciudades_pais[i].precio_tomate);
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+
+
+      celda = document.createElement("td");
+      textoCelda = document.createTextNode(ciudades_pais[i].precio_gym);
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+
+
+      celda = document.createElement("td");
+      textoCelda = document.createTextNode(ciudades_pais[i].salario_medio);
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+
+
+      // agrega la hilera al final de la tabla (al final del elemento tblbody)
+      tblBody.appendChild(hilera);
+    }
+  
+    // posiciona el <tbody> debajo del elemento <table>
+    tabla.appendChild(tblBody);
+    // appends <table> into <body>
+    contenedor.appendChild(tabla);
+
+  }
+  
