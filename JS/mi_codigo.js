@@ -29,7 +29,7 @@ function configuracion() {
     
     
     console.log(PAIS+" salario_medio_pais:"+salario_medio_pais);
-    console.log(PAIS+" precio_medio_tomate:"+salario_medio_pais);
+    //TODO: console.log(PAIS+" precio_medio_tomate:"+precio_medio_tomate);
 }
 
 function principal(){
