@@ -1,15 +1,28 @@
 //CONSTANTE
-const PAIS = "Spain";
+let PAIS = "Spain";
 
 let ciudades = [];
 let ciudades_pais = [];
 let lst_salario = [];
 let salario_medio_pais;
+let lst_paises;
 
 function configuracion() {
 
     //Mapeamos los valores que nos interesan
     ciudades = datum.map((c)=> new Ciudad(c[""], parseFloat(c["Tomato (1kg)"]), parseFloat(c["Fitness Club, Monthly Fee for 1 Adult"]), parseFloat(c["Price per Square Meter to Buy Apartment in City Centre"]), parseFloat(c["Price per Square Meter to Buy Apartment Outside of Centre"]),parseFloat(c["Average Monthly Net Salary (After Tax)"])));
+
+
+    lst_paises = paises();
+    createSelect();
+
+
+    obtenerDatos();
+    //TODO: 
+    //console.log(PAIS+" precio_medio_tomate:"+precio_medio_tomate);
+}
+
+function obtenerDatos(){
 
     //Filtramos los valores que nos interesan
     ciudades_pais = ciudades.filter((c)=>c.nombre.includes(PAIS));
@@ -29,8 +42,6 @@ function configuracion() {
     
     
     console.log(PAIS+" salario_medio_pais:"+salario_medio_pais);
-    //TODO: 
-    //console.log(PAIS+" precio_medio_tomate:"+precio_medio_tomate);
 }
 
 function principal(){
@@ -50,6 +61,7 @@ class Ciudad{
 }
 
 function genera_tabla() {
+  obtenerDatos();
     document.getElementById("nombrePais").innerHTML = PAIS;
 
     // Obtener la referencia del elemento body
@@ -101,3 +113,42 @@ function genera_tabla() {
 
   }
   
+  function createSelect(){
+
+    /**********
+ * ##################
+ * #   <SELECT> 
+ * #################
+ * */
+
+ var select = document.createElement("select");
+select.name = "pais_name";
+select.id= "pais_id";
+select.setAttribute("onchange", "cambioPais(this)");
+select.value = "Spain";
+
+
+for (const val of lst_paises){
+    var option = document.createElement("option");
+    option.value = val;
+    option.text = val.charAt(0).toUpperCase() + val.slice(1);
+    select.appendChild(option);
+}
+
+var label = document.createElement("label");
+label.innerHTML = "Elige pais: "
+label.htmlFor = "pais";
+
+document.getElementById("contenedor").appendChild(label).appendChild(select);
+}
+
+function cambioPais(objeto){
+  PAIS =objeto.value;
+ // alert(objeto.value);
+ genera_tabla();
+}
+
+function paises(){
+  let nombre_paises = new Set(ciudades.map(x=>x.nombre.substring(x.nombre.indexOf(',')+2, x.nombre.length) ));
+  return nombre_paises;
+}
