@@ -7,9 +7,6 @@ function configuracion() {
     //Mapeamos los valores que nos interesan
     ciudades = datum.map((c)=> new Ciudad(c[""], c["Tomato (1kg)"], c["Fitness Club, Monthly Fee for 1 Adult"], c["Price per Square Meter to Buy Apartment in City Centre"], c["Price per Square Meter to Buy Apartment Outside of Centre"],c["Average Monthly Net Salary (After Tax)"]));
 
-    //Filtramos los valores que nos interesan
-    ciudades_spain = ciudades.filter((x)=>x.nombre.includes("Spain"));
-
 }
 function principal(){
 
