@@ -1,6 +1,5 @@
 
 let ciudades = [];
-let ciudades_spain = [];
 
 function configuracion() {
 
