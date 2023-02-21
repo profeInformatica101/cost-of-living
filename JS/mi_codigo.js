@@ -8,6 +8,9 @@ function configuracion() {
 
 }
 function principal(){
+    /*** TU CÓDIGO AQUÍ */
+    
+    
 
 }
 
