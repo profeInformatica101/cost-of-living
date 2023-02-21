@@ -8,7 +8,53 @@ function configuracion() {
 
 }
 function principal(){
-    /*** TU CÓDIGO AQUÍ */
+  /***    ###########################################
+     *    #            TU CÓDIGO AQUÍ               #
+     *    ###########################################
+     * */
+
+    //Muestra por consola el total de ciudades que hay
+
+
+    //Crea una lista con los nombres de las ciudades usando Map
+
+
+    //Muestra por consola el listado de los nombres de las ciudades que aparecen
+            /** Ejemplo 
+             *         nombres = ["A", "B", "C"];
+             *         nombres.forEach(n => {console.log(n);});
+             */
+
+
+    // Crea una lista con las ciudades que son de España
+    // Usa el método 'includes' de String (Ejemplo filter(x => x.nombre.includes("Italy")) )
+
+
+    // Calcula el precio medio de los tomates en Alemania "Germany" usa Map para crear una lista de precios de tipo Float
+    // A continuación usa reduce para calcularlo y mostrarlo por consola
+
+                /** Ejemplo Calculo de salario medio
+                            lst_salario = [1.2, 4.2, 4.2];
+                            salario_medio_pais = lst_salario.reduce((total, x, index, array) => {
+                            total += x;
+                            if( index === array.length-1) { 
+                            return total/array.length;
+                            }else { 
+                            return total;
+                            }
+                        });
+                */
+
+
+    
+
+      //Ordena la lista por 'salario_medio'
+                  /** Ejemplo lista_ordenada por precio gimnasio
+                   *    ord_precio_gym = ciudades.sort((x,y) => parseFloat(y.precio_gym) - parseFloat(x.precio_gym))
+                   *   
+                   */
+    //Muestra las ciudades usando la consola.
+
     
     
 
