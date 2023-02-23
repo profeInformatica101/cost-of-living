@@ -28,8 +28,10 @@ function principal(){
 
     // Crea una lista con las ciudades que son de España
     // Usa el método 'includes' de String (Ejemplo filter(x => x.nombre.includes("Italy")) )
-
-
+    /** Nota: 
+    "Hola Mundo".includes("H");  // ---> true 
+    "Hola Mundo".includes("X");      //--> false
+    */
     // Calcula el precio medio de los tomates en Alemania "Germany" usa Map para crear una lista de precios de tipo Float
     // A continuación usa reduce para calcularlo y mostrarlo por consola
 
