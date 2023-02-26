@@ -21,7 +21,9 @@ function graph(data, id){
 
 window.onload = function () {
     readData(
-      "https://raw.githubusercontent.com/profeInformatica101/HojasDeCalculo/main/cost-of-living.csv",
+      "https://raw.githubusercontent.com/profeInformatica101/HojasDeCalculo/main/titanic3.csv",
       "#contenedor"
     );
   };
+
+  //v2 --> https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv
