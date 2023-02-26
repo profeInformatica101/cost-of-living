@@ -1,56 +1,39 @@
-//CONSTANTE
-const PAIS = "Spain";
+let pasajeros_titanic = [];
 
-let ciudades = [];
-let ciudades_pais = [];
-let lst_salario = [];
-let salario_medio_pais;
 
 function configuracion() {
 
     //Mapeamos los valores que nos interesan
-    ciudades = datum.map((c)=> new Ciudad(c[""], parseFloat(c["Tomato (1kg)"]), parseFloat(c["Fitness Club, Monthly Fee for 1 Adult"]), parseFloat(c["Price per Square Meter to Buy Apartment in City Centre"]), parseFloat(c["Price per Square Meter to Buy Apartment Outside of Centre"]),parseFloat(c["Average Monthly Net Salary (After Tax)"])));
-
-    //Filtramos los valores que nos interesan
-    ciudades_pais = ciudades.filter((c)=>c.nombre.includes(PAIS));
-   
-    //Mapeamos a listado de Float con los salarios
-    lst_salario = ciudades_pais.map((c)=>parseFloat(c.salario_medio));
-
-    //Reducimos el listado de float a una media de salarios.
-    salario_medio_pais = lst_salario.reduce((total, amount, index, array) => {
-        total += amount;
-        if( index === array.length-1) { 
-          return total/array.length;
-        }else { 
-          return total;
-        }
-      });
-    
-    
-    console.log(PAIS+" salario_medio_pais:"+salario_medio_pais);
-    //TODO: 
-    //console.log(PAIS+" precio_medio_tomate:"+precio_medio_tomate);
+    pasajeros_titanic = datum.map((c)=> new Pasajero(c["age"], c["boat"],c["cabin"],c["embarked"],c["fare"],c["home.dest"],c["name"],c["parch"],c["pclass"],c["sex"],c["survived"],c["ticket"]));
+  
 }
 
 function principal(){
     genera_tabla();
 }
 
-class Ciudad{
-    constructor(nombre, precio_tomate, precio_gym, precio_m2_centro,precio_m2_lejos_centro, salario_medio){
-        this.nombre = nombre;
-        this.precio_tomate = precio_tomate;
-        this.precio_gym = precio_gym;
-        this.precio_m2_centro = precio_m2_centro;
-        this.precio_m2_lejos_centro = precio_m2_lejos_centro;
-        this.salario_medio = salario_medio;
-    }
+class Pasajero{
+  constructor(age, boat, cabin, embarked, fare, from, name, parch, pclass, sex, survived, ticket ){
+    this.age = age;
+    this.boat = boat;
+    this.cabin = cabin;
+    this.embarked = embarked;
+    this.fare = fare;
+    this.from = from;
+    this.name = name;
+    this.parch = parch;
+    this.pclass = pclass;
+    this.sex = sex;
+    this.survived = survived;
+    this.ticket = ticket;
+  }
 
 }
 
 function genera_tabla() {
-    document.getElementById("nombrePais").innerHTML = PAIS;
+  //obtenerDatos();
+
+
 
     // Obtener la referencia del elemento body
     var contenedor = document.getElementById("contenedor");
@@ -63,29 +46,29 @@ function genera_tabla() {
     var tblBody = document.createElement("tbody");
   
     // Crea las celdas
-    for (var i = 0; i < ciudades_pais.length; i++) {
+    for (var i = 0; i < pasajeros_titanic.length; i++) {
       // Crea las hileras de la tabla
       var hilera = document.createElement("tr");
   
       var celda = document.createElement("td");
-      var textoCelda = document.createTextNode(ciudades_pais[i].nombre);
+      var textoCelda = document.createTextNode(pasajeros_titanic[i].name);
       celda.appendChild(textoCelda);
       hilera.appendChild(celda);
 
       celda = document.createElement("td");
-      textoCelda = document.createTextNode(ciudades_pais[i].precio_tomate);
-      celda.appendChild(textoCelda);
-      hilera.appendChild(celda);
-
-
-      celda = document.createElement("td");
-      textoCelda = document.createTextNode(ciudades_pais[i].precio_gym);
+      textoCelda = document.createTextNode(pasajeros_titanic[i].from);
       celda.appendChild(textoCelda);
       hilera.appendChild(celda);
 
 
       celda = document.createElement("td");
-      textoCelda = document.createTextNode(ciudades_pais[i].salario_medio);
+      textoCelda = document.createTextNode(pasajeros_titanic[i].pclass);
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+
+
+      celda = document.createElement("td");
+      textoCelda = document.createTextNode(pasajeros_titanic[i].age);
       celda.appendChild(textoCelda);
       hilera.appendChild(celda);
 
@@ -101,3 +84,64 @@ function genera_tabla() {
 
   }
   
+  function createSelect(){
+
+    /**********
+ * ##################
+ * #   <SELECT> 
+ * #################
+ * */
+
+ var select = document.createElement("select");
+select.name = "pais_name";
+select.id= "pais_id";
+select.setAttribute("onchange", "cambioPais(this)");
+select.value = "Spain";
+
+
+for (const val of lst_paises){
+    var option = document.createElement("option");
+    option.value = val;
+    option.text = val.charAt(0).toUpperCase() + val.slice(1);
+    select.appendChild(option);
+}
+
+var label = document.createElement("label");
+label.innerHTML = "Elige pais: "
+label.htmlFor = "pais";
+
+document.getElementById("contenedor").appendChild(label).appendChild(select);
+}
+
+function cambioPais(objeto){
+  PAIS =objeto.value;
+ // alert(objeto.value);
+ genera_tabla();
+}
+
+function barcos(){
+  let barcos = new Set(pasajeros_titanic.map(p=>p.boat));
+  return barcos;
+}
+function cabinas(){
+  let cabin = new Set(pasajeros_titanic.map(p=>p.cabin));
+  return cabin;
+}
+
+
+function clases(){
+  let clases_posibles = new Set(pasajeros_titanic.map(p=>p.pclass));
+  return clases_posibles;
+}
+
+function nombreCiudades(){
+  let nombre_ciudades = new Set(pasajeros_titanic.map(p=>p.from));
+  return nombre_ciudades;
+}
+function imprimirNombreCiudades(){
+  nombreCiudades().forEach(p=>console.log(p));
+}
+
+function imprimirNombreMujeres(){
+   pasajeros_titanic.filter(p => p.sex === "female").map(p=>p.name).forEach(p=>console.log(p));
+}
